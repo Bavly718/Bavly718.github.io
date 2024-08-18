@@ -54,16 +54,6 @@ header h1 {
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
 }
 
-.box h2 {
-    text-align: center;
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    color: #ff4b2b;
-    background: linear-gradient(45deg, #ff6b6b, #ff4b2b);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
 .content {
     display: none;
     width: 100%;
@@ -140,6 +130,10 @@ textarea[readonly] {
 .box.expanded .content {
     display: flex; /* Ensure content is displayed as flex */
     flex-direction: column; /* Stack content vertically */
+    justify-content: center;
+    align-items: center;
+    width: 80%; /* Adjust width for a better look */
+    max-width: 600px; /* Set a max-width to prevent too large images */
 }
 
 .box-image {
