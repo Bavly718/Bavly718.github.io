@@ -3,8 +3,8 @@
     width: 100%;
     text-align: center;
     flex-direction: column;
-    overflow-y: hidden; /* No scroll initially in content */
     position: relative;
+    height: 100%;
 }
 
 .box.expanded .content {
@@ -13,21 +13,21 @@
     justify-content: flex-start;
     align-items: center;
     width: 100%;
+    height: 100%;
     position: relative;
 }
 
 textarea {
     position: fixed; /* Keep the text area in a fixed position */
-    bottom: 10px; /* Place it at the bottom of the screen */
+    bottom: 20px; /* Place it near the bottom of the screen */
     width: calc(100% - 40px); /* Adjust width to fit the screen */
     height: 100px;
-    margin: 0;
     padding: 10px;
     border: 2px solid #ff4b2b;
     border-radius: 10px;
     background: #fff;
     color: #333;
-    z-index: 1; /* Keep it above the image */
+    z-index: 1; /* Ensure it's on top of the image */
     resize: none;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -39,11 +39,11 @@ textarea {
     border-radius: 10px;
     margin-top: 10px;
     z-index: 0;
-    overflow-y: scroll; /* Allow the image to scroll vertically */
+    max-height: calc(100vh - 150px); /* Ensure the image is scrollable within available space */
+    overflow-y: auto; /* Enable vertical scrolling for the image */
 }
 
-.expanded .box-image {
-    max-height: 100vh; /* Let the image be scrollable */
-    overflow-y: auto; /* Enable scrolling for the image */
-    position: relative; /* Keeps the image scrollable inside the box */
+.box.expanded .box-image {
+    overflow-y: auto; /* Allow the image to scroll when larger than available space */
+    position: relative;
 }
