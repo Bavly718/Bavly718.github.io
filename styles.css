@@ -3,40 +3,47 @@
     width: 100%;
     text-align: center;
     flex-direction: column;
-    overflow-y: auto; /* Add vertical scrollbar */
-    max-height: 80vh; /* Limit the height of the content area to ensure it fits in the viewport */
+    overflow-y: hidden; /* No scroll initially in content */
+    position: relative;
 }
 
 .box.expanded .content {
-    display: flex; /* Ensure content is displayed as flex */
-    flex-direction: column; /* Stack content vertically */
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
-    width: 80%; /* Adjust width for a better look */
-    max-width: 600px; /* Set a max-width to prevent too large images */
-    overflow-y: auto; /* Add vertical scrollbar when needed */
-    max-height: 80vh; /* Keep the height responsive with a scrollbar */
+    width: 100%;
+    position: relative;
 }
 
 textarea {
-    width: calc(100% - 20px);
+    position: fixed; /* Keep the text area in a fixed position */
+    bottom: 10px; /* Place it at the bottom of the screen */
+    width: calc(100% - 40px); /* Adjust width to fit the screen */
     height: 100px;
-    margin: 10px 0;
+    margin: 0;
+    padding: 10px;
     border: 2px solid #ff4b2b;
     border-radius: 10px;
-    padding: 10px;
-    resize: none;
     background: #fff;
     color: #333;
-    font-family: inherit;
-    transition: border-color 0.3s ease;
-    z-index: 1; /* Ensure textarea is on top */
+    z-index: 1; /* Keep it above the image */
+    resize: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .box-image {
     width: 100%;
+    max-width: 100%; /* Ensure the image does not overflow horizontally */
     height: auto;
     border-radius: 10px;
     margin-top: 10px;
-    z-index: 0; /* Ensure image is below textarea */
+    z-index: 0;
+    overflow-y: scroll; /* Allow the image to scroll vertically */
+}
+
+.expanded .box-image {
+    max-height: 100vh; /* Let the image be scrollable */
+    overflow-y: auto; /* Enable scrolling for the image */
+    position: relative; /* Keeps the image scrollable inside the box */
 }
