@@ -138,7 +138,7 @@ textarea[readonly] {
 
 .box-image {
     width: 100%;
-    height: auto;
+    height: 100px;
     border-radius: 10px;
     margin-top: 10px;
     z-index: 0; /* Ensure image is below textarea */
