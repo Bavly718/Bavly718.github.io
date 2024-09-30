@@ -62,14 +62,14 @@ header h1 {
 }
 
 textarea {
-    width: 500px;
+    width: 200px;
     height: 500px; /* Increased height for better readability */
     max-height: 700px; /* Maximum height */
     margin: 10px 0;
     border: 2px solid #ff4b2b;
     border-radius: 10px;
     padding: 15px; /* Increased padding */
-    font-size: 1.1em; /* Increased font size for readability */
+    font-size: 1.9em; /* Increased font size for readability */
     line-height: 1.5; /* Improved line spacing */
     resize: none;
     background: #fff;
