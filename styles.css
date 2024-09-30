@@ -1,4 +1,4 @@
- body {
+body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
@@ -127,10 +127,27 @@ textarea[readonly] {
     overflow: auto;
 }
 
-/* For the expanded box, display the content side by side */
+.box.expanded .content {
+    display: flex; /* Ensure content is displayed as flex */
+    flex-direction: column; /* Stack content vertically */
+    justify-content: center;
+    align-items: center;
+    width: 80%; /* Adjust width for a better look */
+    max-width: 600px; /* Set a max-width to prevent too large images */
+}
+
+.box-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-top: 10px;
+    z-index: 0; /* Ensure image is below textarea */
+}
+
+/* Expanded box content for larger screens */
 .box.expanded .content {
     display: flex;
-    flex-direction: row; /* Display content in a row */
+    flex-direction: row; /* Display content in a row (side by side) */
     justify-content: center;
     align-items: flex-start;
     width: 90%; /* Adjust width to fill most of the screen */
@@ -152,12 +169,12 @@ textarea {
     border-radius: 10px;
 }
 
-/* Adjust layout for smaller devices (phones, tablets) */
+/* Responsive design: Stack content vertically on small screens */
 @media (max-width: 768px) {
     .box.expanded .content {
         flex-direction: column; /* Stack the image and textarea vertically on small screens */
     }
-    
+
     textarea {
         margin-right: 0; /* Remove margin in vertical view */
         margin-bottom: 20px; /* Add space below the textarea */
