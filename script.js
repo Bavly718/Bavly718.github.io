@@ -35,14 +35,19 @@ document.addEventListener("DOMContentLoaded", function() {
         return monthNames[month - 1];
     }
 });
-   document.getElementById('show-image').addEventListener('click', function() {
-        // Show the image and hide the textarea
-        document.getElementById('image').style.display = 'block';
-        document.getElementById('text-area').style.display = 'none';
+document.querySelectorAll('.toggle-button').forEach(button => {
+    button.addEventListener('click', function() {
+        const boxIndex = this.id.match(/\d+/)[0]; // Get the number from the button ID
+        const image = document.getElementById(`image${boxIndex}`);
+        const textArea = document.getElementById(`text-area${boxIndex}`);
+        
+        if (this.id.startsWith('show-image')) {
+            image.style.display = 'block';
+            textArea.style.display = 'none';
+        } else {
+            image.style.display = 'none';
+            textArea.style.display = 'block';
+        }
     });
+});
 
-    document.getElementById('show-text').addEventListener('click', function() {
-        // Show the textarea and hide the image
-        document.getElementById('text-area').style.display = 'block';
-        document.getElementById('image').style.display = 'none';
-    });
