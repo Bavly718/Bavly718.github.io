@@ -27,7 +27,6 @@ header h1 {
     max-width: 1200px;
     gap: 20px;
     justify-content: center;
-    transition: transform 0.5s ease;
     position: relative;
     padding: 20px;
 }
@@ -35,6 +34,8 @@ header h1 {
 .box {
     position: relative;
     width: 22%;
+    min-width: 150px;
+    max-width: 250px;
     background: linear-gradient(145deg, #ffffff, #f5f5f5);
     padding: 20px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -58,25 +59,25 @@ header h1 {
     display: none;
     width: 100%;
     text-align: center;
-    flex-direction: column; /* Ensure content stacks vertically */
+    flex-direction: column;
 }
 
 textarea {
-    width: 200px;
-    height: 500px; /* Increased height for better readability */
-    max-height: 700px; /* Maximum height */
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    max-height: 400px;
     margin: 10px 0;
     border: 2px solid #ff4b2b;
     border-radius: 10px;
-    padding: 15px; /* Increased padding */
-    font-size: 1.9em; /* Increased font size for readability */
-    line-height: 1.5; /* Improved line spacing */
+    padding: 15px;
+    font-size: 1.2em;
+    line-height: 1.5;
     resize: none;
     background: #fff;
     color: #333;
     font-family: inherit;
     transition: border-color 0.3s ease;
-    z-index: 1; /* Ensure textarea is on top */
 }
 
 textarea:focus {
@@ -113,15 +114,14 @@ textarea[readonly] {
 }
 
 .box.expanded {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90vw;
+    height: 90vh;
     z-index: 20;
-    border-radius: 0;
+    border-radius: 20px;
     transition: transform 0.5s ease;
-    transform: scale(1);
     background: #fff;
     display: flex;
     align-items: center;
@@ -131,49 +131,81 @@ textarea[readonly] {
 }
 
 .box.expanded .content {
-    display: flex; /* Ensure content is displayed as flex */
-    flex-direction: column; /* Stack content vertically */
-    justify-content: center;
-    align-items: center;
-    width: 80%; /* Adjust width for a better look */
-    max-width: 600px; /* Set a max-width to prevent too large images */
-}
-
-.box-image {
-    width: 100%; /* Ensure the image takes the full width of the container */
-    height: auto; /* Maintain aspect ratio */
-    max-height: 100%; /* Prevent the image from exceeding its container */
-    object-fit: contain; /* Ensure the entire image is visible */
-    border-radius: 10px; /* Maintain consistent styling */
-    display: block; /* Prevent extra margins or spacing issues */
-}
-
-/* Expanded box content for larger screens */
-.box.expanded .content {
     display: flex;
-    flex-direction: row; /* Display content in a row (side by side) */
+    flex-direction: row;
     justify-content: center;
     align-items: flex-start;
-    width: 90%; /* Adjust width to fill most of the screen */
-    max-width: 1200px; /* Set a max-width for large screens */
+    width: 90%;
+    max-width: 1200px;
     margin: 20px;
 }
 
 textarea {
-    flex: 1; /* Allow textarea to grow and take available space */
-    height: auto; /* Ensure the height auto adjusts */
-    max-height: 400px; /* Limit max height for large texts */
-    margin-right: 20px; /* Add some space between image and textarea */
+    flex: 1;
+    margin-right: 20px;
 }
 
 .box-image {
-    flex: 1; /* Allow image to grow and take available space */
+    flex: 1;
     max-width: 100%;
-    height: auto; /* Make sure the image adjusts dynamically */
+    height: auto;
     border-radius: 10px;
+    display: block;
 }
 
-/* Style for the buttons */
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .container {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .box {
+        width: 45%; /* Two columns for mid-sized screens */
+    }
+
+    .box.expanded {
+        width: 95%;
+        height: auto;
+        top: 2%;
+        left: 2%;
+    }
+}
+
+@media (max-width: 768px) {
+    .box {
+        width: 45%;
+    }
+
+    .box.expanded .content {
+        flex-direction: column;
+    }
+
+    textarea {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .box-image {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .box {
+        width: 90%;
+    }
+
+    .box.expanded {
+        width: 100%;
+        height: auto;
+        top: 0;
+        left: 0;
+        padding: 10px;
+    }
+}
+
+/* Button styles */
 .button-group {
     display: flex;
     justify-content: center;
@@ -194,23 +226,6 @@ textarea {
 
 .toggle-button:hover {
     background-color: #ff6b6b;
-}
-
-/* Responsive design: Stack content vertically on small screens */
-@media (max-width: 768px) {
-    .box.expanded .content {
-        flex-direction: column; /* Stack the image and textarea vertically on small screens */
-    }
-
-    textarea {
-        margin-right: 0; /* Remove margin in vertical view */
-        margin-bottom: 20px; /* Add space below the textarea */
-    }
-
-    .box-image {
-        max-width: 100%; /* Ensure image takes full width in small screens */
-        margin-bottom: 20px; /* Add space below the image */
-    }
 }
 
 /* Hide image and textarea initially */
