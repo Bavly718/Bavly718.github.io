@@ -140,11 +140,12 @@ textarea[readonly] {
 }
 
 .box-image {
-    width: calc(100% - 20px);
-    height: 200px;
-    border-radius: 10px;
-    margin-top: 10px;
-    z-index: 0; /* Ensure image is below textarea */
+    width: 100%; /* Ensure the image takes the full width of the container */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 100%; /* Prevent the image from exceeding its container */
+    object-fit: contain; /* Ensure the entire image is visible */
+    border-radius: 10px; /* Maintain consistent styling */
+    display: block; /* Prevent extra margins or spacing issues */
 }
 
 /* Expanded box content for larger screens */
