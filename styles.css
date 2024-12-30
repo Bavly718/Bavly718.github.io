@@ -140,7 +140,7 @@ textarea[readonly] {
 }
 
 .box-image {
-    width: calc(100% - 20px);
+    width: 100%;
     height: auto;
     border-radius: 10px;
     margin-top: 10px;
