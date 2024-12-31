@@ -1,193 +1,61 @@
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-    overflow: hidden; /* Prevent scrolling when a box is expanded */
-}
-
-header {
-    text-align: center;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-bottom: 2px solid #ff4b2b;
-    margin-bottom: 20px;
-}
-
-header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2em;
-    color: #ff4b2b;
-    margin: 0;
-}
-
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    gap: 20px;
-    justify-content: center;
-    transition: transform 0.5s ease;
-    position: relative;
-    padding: 20px;
-}
-
+/* General Box Styles */
 .box {
     position: relative;
     width: 22%;
-    background: linear-gradient(145deg, #ffffff, #f5f5f5);
     padding: 20px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    margin: 10px;
     border-radius: 20px;
-    box-sizing: border-box;
+    background-color: #f5f5f5;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     overflow: hidden;
+    transition: transform 0.5s ease, width 0.5s ease, height 0.5s ease;
     cursor: pointer;
-    transition: transform 0.5s ease, width 0.5s ease, height 0.5s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
-.box:hover {
-    transform: scale(1.05);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-}
-
-.content {
-    display: none;
-    width: 100%;
+.box .cover {
+    font-size: 18px;
+    font-weight: bold;
     text-align: center;
-    flex-direction: column; /* Ensure content stacks vertically */
-}
-
-textarea {
-    width: 200px;
-    height: 500px; /* Increased height for better readability */
-    max-height: 700px; /* Maximum height */
-    margin: 10px 0;
-    border: 2px solid #ff4b2b;
-    border-radius: 10px;
-    padding: 15px; /* Increased padding */
-    font-size: 1.9em; /* Increased font size for readability */
-    line-height: 1.5; /* Improved line spacing */
-    resize: none;
-    background: #fff;
     color: #333;
-    font-family: inherit;
-    transition: border-color 0.3s ease;
-    z-index: 1; /* Ensure textarea is on top */
 }
 
-textarea:focus {
-    border-color: #ff6b6b;
-    outline: none;
-}
-
-input[type="file"],
-textarea[readonly] {
-    background: #f0f0f0;
-    cursor: not-allowed;
-}
-
-.cover {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 100%);
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 1.5em;
-    border-radius: 20px;
-    transition: opacity 0.5s ease;
-}
-
-.cover.active {
-    opacity: 0;
-    pointer-events: none;
-}
-
+/* Expanded Box Styles */
 .box.expanded {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 20;
-    border-radius: 0;
-    transition: transform 0.5s ease;
-    transform: scale(1);
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    overflow: auto;
-}
-
-.box.expanded .content {
-    display: flex; /* Ensure content is displayed as flex */
-    flex-direction: column; /* Stack content vertically */
-    justify-content: center;
-    align-items: center;
-    width: 80%; /* Adjust width for a better look */
-    max-width: 600px; /* Set a max-width to prevent too large images */
-}
-
-.box-image {
     width: 100%;
     height: auto;
-    border-radius: 10px;
-    margin-top: 10px;
-    z-index: 0; /* Ensure image is below textarea */
-}
-
-/* Expanded box content for larger screens */
-.box.expanded .content {
-    display: flex;
-    flex-direction: row; /* Display content in a row (side by side) */
-    justify-content: center;
+    flex-direction: column;
     align-items: flex-start;
-    width: 90%; /* Adjust width to fill most of the screen */
-    max-width: 1200px; /* Set a max-width for large screens */
-    margin: 20px;
+    overflow: visible;
 }
 
-textarea {
-    flex: 1; /* Allow textarea to grow and take available space */
-    height: auto; /* Ensure the height auto adjusts */
-    max-height: 400px; /* Limit max height for large texts */
-    margin-right: 20px; /* Add some space between image and textarea */
+/* Content Area */
+.content {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
 }
 
-.box-image {
-    flex: 1; /* Allow image to grow and take available space */
-    max-width: 100%;
-    height: auto; /* Make sure the image adjusts dynamically */
-    border-radius: 10px;
+.content.visible {
+    display: flex;
 }
 
-/* Style for the buttons */
+/* Buttons for Image and Text Toggle */
 .button-group {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
 .toggle-button {
     background-color: #ff4b2b;
     color: white;
     border: none;
-    padding: 10px 20px;
-    margin: 5px;
     border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
     cursor: pointer;
-    font-size: 1em;
     transition: background-color 0.3s ease;
 }
 
@@ -195,24 +63,62 @@ textarea {
     background-color: #ff6b6b;
 }
 
-/* Responsive design: Stack content vertically on small screens */
-@media (max-width: 768px) {
-    .box.expanded .content {
-        flex-direction: column; /* Stack the image and textarea vertically on small screens */
-    }
-
-    textarea {
-        margin-right: 0; /* Remove margin in vertical view */
-        margin-bottom: 20px; /* Add space below the textarea */
-    }
-
-    .box-image {
-        max-width: 100%; /* Ensure image takes full width in small screens */
-        margin-bottom: 20px; /* Add space below the image */
-    }
+/* Image Gallery Styles */
+.image-gallery {
+    position: relative;
+    width: 100%;
+    margin-top: 15px;
 }
 
-/* Hide image and textarea initially */
-#image, #text-area {
+.image-gallery img {
+    max-width: 100%;
+    margin: 10px 0;
     display: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-gallery img.active {
+    display: block;
+}
+
+/* Image Toggle Buttons */
+.image-toggle-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.image-toggle-buttons button {
+    background-color: #ff4b2b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.image-toggle-buttons button:hover {
+    background-color: #ff6b6b;
+}
+
+/* Text Area */
+textarea {
+    width: 100%;
+    height: 150px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #333;
+    resize: none;
+    transition: border-color 0.3s ease;
+}
+
+textarea:focus {
+    border-color: #ff4b2b;
+    outline: none;
 }
