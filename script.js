@@ -1,61 +1,56 @@
-// JavaScript to handle box toggles
-document.addEventListener("DOMContentLoaded", () => {
-    const boxes = document.querySelectorAll(".box");
+document.addEventListener("DOMContentLoaded", function() {
+    const today = new Date();
+    const currentMonth = today.getMonth() + 1;
 
-    boxes.forEach((box) => {
-        const showImageButton = box.querySelector(".toggle-button#show-image" + box.id.slice(-1));
-        const showTextButton = box.querySelector(".toggle-button#show-text" + box.id.slice(-1));
-        const images = box.querySelectorAll(".box-image");
-        const textArea = box.querySelector("textarea");
-        const nextImageButton = box.querySelector(".next-image");
-        const prevImageButton = box.querySelector(".prev-image");
+    const boxes = document.querySelectorAll('.box');
+
+    boxes.forEach((box, index) => {
+        const month = index + 1;
+        const cover = box.querySelector('.cover');
+        const content = box.querySelector('.content');
+        const images = box.querySelectorAll('.box-image');
         let currentImageIndex = 0;
 
-        // Show images
-        if (showImageButton) {
-            showImageButton.addEventListener("click", () => {
-                textArea.style.display = "none";
-                if (images.length > 0) {
-                    images.forEach((img) => (img.style.display = "none"));
-                    images[currentImageIndex].style.display = "block";
-                } else {
-                    alert("No images available!");
-                }
-            });
-        }
+        box.querySelector('.cover').textContent = getMonthName(month);
 
-        // Show text
-        if (showTextButton) {
-            showTextButton.addEventListener("click", () => {
-                images.forEach((img) => (img.style.display = "none"));
-                textArea.style.display = "block";
-            });
-        }
-
-        // Next image
-        if (nextImageButton) {
-            nextImageButton.addEventListener("click", () => {
-                if (images.length > 0) {
-                    images[currentImageIndex].style.display = "none";
-                    currentImageIndex = (currentImageIndex + 1) % images.length;
-                    images[currentImageIndex].style.display = "block";
+        box.addEventListener('click', function() {
+            if (month <= currentMonth) {
+                if (month === currentMonth) {
+                    document.querySelector('.container').style.transform = 'scale(0.9)';
+                    box.classList.add('expanded');
+                    cover.classList.add('active');
+                    content.style.display = 'flex';
                 } else {
-                    alert("No more images!");
+                    alert('Not Yet');
                 }
-            });
-        }
+            } else {
+                alert('Not Yet');
+            }
+        });
 
-        // Previous image
-        if (prevImageButton) {
-            prevImageButton.addEventListener("click", () => {
-                if (images.length > 0) {
-                    images[currentImageIndex].style.display = "none";
-                    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-                    images[currentImageIndex].style.display = "block";
-                } else {
-                    alert("No previous images!");
-                }
+        const prevButton = box.querySelector('.prev-image');
+        const nextButton = box.querySelector('.next-image');
+
+        if (prevButton && nextButton) {
+            prevButton.addEventListener('click', function() {
+                images[currentImageIndex].style.display = 'none';
+                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                images[currentImageIndex].style.display = 'block';
+            });
+
+            nextButton.addEventListener('click', function() {
+                images[currentImageIndex].style.display = 'none';
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                images[currentImageIndex].style.display = 'block';
             });
         }
     });
+
+    function getMonthName(month) {
+        const monthNames = [
+            "January", "February", "March", "April", "May", "June", 
+            "July", "August", "September", "October", "November", "December"
+        ];
+        return monthNames[month - 1];
+    }
 });
