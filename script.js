@@ -54,3 +54,43 @@ document.addEventListener("DOMContentLoaded", function() {
         return monthNames[month - 1];
     }
 });
+document.addEventListener("DOMContentLoaded", function () {
+    // Toggle image and text visibility
+    document.querySelectorAll('.toggle-button').forEach(button => {
+        button.addEventListener('click', function () {
+            const boxIndex = this.id.match(/\d+/)[0]; // Extract box number
+            const images = document.querySelectorAll(`#box${boxIndex} .box-image`);
+            const textArea = document.getElementById(`text${boxIndex}`);
+
+            if (this.id.startsWith('show-image')) {
+                images.forEach(img => img.style.display = 'block'); // Show images
+                textArea.style.display = 'none'; // Hide text
+            } else {
+                images.forEach(img => img.style.display = 'none'); // Hide images
+                textArea.style.display = 'block'; // Show text
+            }
+        });
+    });
+
+    // Image navigation (next and previous)
+    document.querySelectorAll('.prev-image, .next-image').forEach(button => {
+        button.addEventListener('click', function () {
+            const month = this.getAttribute('data-month');
+            const images = document.querySelectorAll(`#box${month} .box-image`);
+            let currentIndex = Array.from(images).findIndex(img => img.style.display === 'block');
+
+            // Hide current image
+            images[currentIndex].style.display = 'none';
+
+            // Determine next or previous index
+            if (this.classList.contains('next-image')) {
+                currentIndex = (currentIndex + 1) % images.length;
+            } else {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+            }
+
+            // Show new image
+            images[currentIndex].style.display = 'block';
+        });
+    });
+});
