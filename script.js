@@ -76,8 +76,3 @@ document.addEventListener("DOMContentLoaded", function () {
         return monthNames[month - 1];
     }
 });
-
-        // Optionally: Trigger resize for prefilled text
-        textarea.dispatchEvent(new Event("input"));
-    });
-});
