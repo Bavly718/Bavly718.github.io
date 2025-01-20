@@ -62,30 +62,27 @@ header h1 {
 }
 
 textarea {
-    flex: 1; /* Allow textarea to grow */
-    width: 100%; /* Take the full width */
-    height: auto; /* Ensure height auto adjusts */
-    overflow: hidden; /* Hide overflow to prevent scrollbars */
-    max-height: none; /* Remove any max-height limitations */
-    margin-right: 20px; /* Add space between image and textarea */
+    width: 200px;
+    height: 500px; /* Increased height for better readability */
+    max-height: 700px; /* Maximum height */
+    margin: 10px 0;
     border: 2px solid #ff4b2b;
     border-radius: 10px;
-    padding: 15px;
-    font-size: 1.9em;
-    line-height: 1.5;
-    resize: none; /* Prevent manual resizing */
+    padding: 15px; /* Increased padding */
+    font-size: 1.9em; /* Increased font size for readability */
+    line-height: 1.5; /* Improved line spacing */
+    resize: none;
     background: #fff;
     color: #333;
     font-family: inherit;
     transition: border-color 0.3s ease;
-    z-index: 1;
+    z-index: 1; /* Ensure textarea is on top */
 }
 
 textarea:focus {
     border-color: #ff6b6b;
     outline: none;
 }
-
 
 input[type="file"],
 textarea[readonly] {
