@@ -76,3 +76,16 @@ document.addEventListener("DOMContentLoaded", function () {
         return monthNames[month - 1];
     }
 });
+document.addEventListener("DOMContentLoaded", () => {
+    const textareas = document.querySelectorAll("textarea");
+
+    textareas.forEach((textarea) => {
+        textarea.addEventListener("input", () => {
+            textarea.style.height = "auto"; // Reset height
+            textarea.style.height = `${textarea.scrollHeight}px`; // Set to full content height
+        });
+
+        // Optionally: Trigger resize for prefilled text
+        textarea.dispatchEvent(new Event("input"));
+    });
+});
