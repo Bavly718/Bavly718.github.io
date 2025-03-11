@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const boxes = document.querySelectorAll('.box');
 
-    // Set up click event for toggling text and image visibility
     document.querySelectorAll('.toggle-button').forEach(button => {
         button.addEventListener('click', function () {
             const boxIndex = this.id.match(/\d+/)[0]; // Extract box number
@@ -15,35 +14,46 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 images.forEach(img => img.style.display = 'none'); // Hide all images
                 textArea.style.display = 'block'; // Show text
+                adjustHeight(textArea); // Adjust the height dynamically
             }
         });
+    });
+
+    function adjustHeight(textarea) {
+        if (textarea) {
+            textarea.style.height = "auto"; // Reset height
+            textarea.style.height = textarea.scrollHeight + "px"; // Adjust height based on content
+        }
+    }
+
+    // Ensure text areas adjust height on load if they have content
+    document.querySelectorAll('textarea').forEach(textarea => {
+        adjustHeight(textarea);
+        textarea.addEventListener("input", () => adjustHeight(textarea)); // Adjust on input change
     });
 
     // Set up click events for "Next" and "Previous" buttons
     document.querySelectorAll('.prev-image, .next-image').forEach(button => {
         button.addEventListener('click', function () {
-            const boxIndex = this.id.match(/\d+/)[0]; // Extract box number
+            const boxIndex = this.dataset.month; // Get month number
             const images = document.querySelectorAll(`#box${boxIndex} .box-image`);
             let currentIndex = Array.from(images).findIndex(img => img.style.display === 'block');
 
-            // Hide current image
             if (currentIndex >= 0) images[currentIndex].style.display = 'none';
 
-            // Determine next or previous index
             if (this.classList.contains('next-image')) {
-                currentIndex = (currentIndex + 1) % images.length; // Wrap around on next
+                currentIndex = (currentIndex + 1) % images.length; // Wrap around
             } else {
-                currentIndex = (currentIndex - 1 + images.length) % images.length; // Wrap around on prev
+                currentIndex = (currentIndex - 1 + images.length) % images.length; // Wrap around
             }
 
-            // Show new image
             images[currentIndex].style.display = 'block';
         });
     });
 
     // Expand box and display its content based on the current month
     const today = new Date();
-    const currentMonth = today.getMonth() + 1; // JavaScript months are 0-11
+    const currentMonth = today.getMonth() + 1; 
 
     boxes.forEach((box, index) => {
         const month = index + 1;
@@ -58,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     document.querySelector('.container').style.transform = 'scale(0.9)';
                     box.classList.add('expanded');
                     cover.classList.add('active');
-                    content.style.display = 'flex'; // Show content as flex
+                    content.style.display = 'flex'; 
                 } else {
                     alert('Not Yet');
                 }
