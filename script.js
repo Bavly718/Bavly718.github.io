@@ -51,10 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Expand box and display its content based on the current month
-    const today = new Date();
-    const currentMonth = today.getMonth() + 1; 
-
+    // Expand box and display its content (بدون شرط التاريخ)
     boxes.forEach((box, index) => {
         const month = index + 1;
         const cover = box.querySelector('.cover');
@@ -63,18 +60,10 @@ document.addEventListener("DOMContentLoaded", function () {
         box.querySelector('.cover').textContent = getMonthName(month);
 
         box.addEventListener('click', function () {
-            if (month <= currentMonth) {
-                if (month === currentMonth) {
-                    document.querySelector('.container').style.transform = 'scale(0.9)';
-                    box.classList.add('expanded');
-                    cover.classList.add('active');
-                    content.style.display = 'flex'; 
-                } else {
-                    alert('Not Yet');
-                }
-            } else {
-                alert('Not Yet');
-            }
+            document.querySelector('.container').style.transform = 'scale(0.9)';
+            box.classList.add('expanded');
+            cover.classList.add('active');
+            content.style.display = 'flex'; 
         });
     });
 
