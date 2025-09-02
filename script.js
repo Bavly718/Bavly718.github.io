@@ -75,3 +75,18 @@ document.addEventListener("DOMContentLoaded", function () {
         return monthNames[month - 1];
     }
 });
+// زر الرجوع
+document.querySelectorAll('.back-button').forEach(button => {
+    button.addEventListener('click', function (e) {
+        e.stopPropagation(); // يمنع إعادة فتح البوكس بالضغط
+        const box = this.closest('.box');
+        const cover = box.querySelector('.cover');
+        const content = box.querySelector('.content');
+
+        box.classList.remove('expanded');
+        cover.classList.remove('active');
+        content.style.display = 'none';
+        document.querySelector('.container').style.transform = 'scale(1)';
+    });
+});
+
